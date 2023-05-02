@@ -31,7 +31,8 @@ public class LikeService {
         User user = userRepository.findById(userDetails.getUser().getId()).orElseThrow(
                 () -> new CustomException(ErrorCode.INVALID_USER)
         );
-        if (blogLikeRepository.findByUser(user).isPresent()) {
+//        User user = userDetails.getUser();
+        if (blogLikeRepository.findByUserAndBlog(user, blog).isPresent()) {
             blog.setLikeCount(blogLikeCount(blogId) - 1);
             blogLikeRepository.deleteByBlogAndUser(blog, user);
             return new StatusResponseDto(200, "좋아요 삭제 성공.");
@@ -58,7 +59,8 @@ public class LikeService {
         User user = userRepository.findById(userDetails.getUser().getId()).orElseThrow(
                 () -> new CustomException(ErrorCode.INVALID_USER)
         );
-        if (commentLikeRepository.findByUser(user).isPresent()) {
+//        User user = userDetails.getUser();
+        if (commentLikeRepository.findByUserAndComment(user, comment).isPresent()) {
             comment.setCommentLikeCount(commentLikeCount(commentId) - 1);
             commentLikeRepository.deleteByCommentAndUser(comment, user);
             return new StatusResponseDto(200, "좋아요 삭제 성공.");

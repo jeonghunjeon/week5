@@ -10,6 +10,6 @@ import java.util.Optional;
 
 public interface BlogLikeRepository extends JpaRepository<BlogLike, Long> {
     List<BlogLike> findAllByBlog(Blog blog);
-    Optional<BlogLike> findByUser(User user);
+    Optional<BlogLike> findByUserAndBlog(User user, Blog blog);
     void deleteByBlogAndUser(Blog blog, User user);
 }
